@@ -22,8 +22,8 @@ export function TableColumnMenu(props: TableColumnMenuProps) {
       className="flex text-[10px] items-center justify-between gap-2 pt-1 pl-5 data-[active=true]:bg-[#2a273f] data-[active=true]:text-[#E0DEF2]"
       {...props}
     >
-      <span className="font-semibold">{label}</span>
-      <span className="text-[#817c9c]">{subLabel}</span>
+      <span>{label}</span>
+      <span className="text-zinc-400">{subLabel}</span>
     </span>
   );
 }
