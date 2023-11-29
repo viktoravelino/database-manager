@@ -3,7 +3,8 @@ import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
-import { openNewTab, tabsContext } from "./context";
+import { openNewTab, tabsStore } from "@/stores/tabsStore";
+
 import { Tab } from "./tab";
 
 export function Tabs() {
@@ -16,7 +17,7 @@ export function Tabs() {
 
   return (
     <div className="flex gap-0.5">
-      {tabsContext.value.map((tab) => {
+      {tabsStore.value.map((tab) => {
         return (
           <Tab key={tab.id} label={tab.name} type={tab.type} id={tab.id} />
         );

@@ -1,10 +1,12 @@
-import { TabType } from "@/@types/Tab";
-import { cn } from "@/lib/utils";
 import { Code, PencilLine, Table, X } from "lucide-react";
 import { useMatch, useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
+
+import type { TabType } from "@/@types/Tab";
+
 import { Button } from "@/components/ui/button";
-import { closeTab, tabsContext } from "./context";
+import { closeTab, tabsStore } from "@/stores/tabsStore";
+import { cn } from "@/lib/utils";
 
 interface TabsProps {
   id: number;
@@ -28,9 +30,9 @@ export function Tab({ label, type, id }: TabsProps) {
   function handleDeleteTab() {
     if (!isLinkActive) return closeTab(id);
 
-    const currentTabIndex = tabsContext.value.findIndex((tab) => tab.id === id);
-    const nextTab = tabsContext.value[currentTabIndex + 1];
-    const newSelectedTab = nextTab ?? tabsContext.value[currentTabIndex - 1];
+    const currentTabIndex = tabsStore.value.findIndex((tab) => tab.id === id);
+    const nextTab = tabsStore.value[currentTabIndex + 1];
+    const newSelectedTab = nextTab ?? tabsStore.value[currentTabIndex - 1];
 
     navigate(
       newSelectedTab ? `${newSelectedTab.type}/${newSelectedTab.id}` : "/"
@@ -51,7 +53,10 @@ export function Tab({ label, type, id }: TabsProps) {
         end
         to={`${type}/${id}`}
         className="flex items-center gap-1 pr-1 data-[active]:bg-transparent"
-        // onClick={() => console.log("Go to tab")}
+        onAuxClick={(e) => {
+          e.preventDefault();
+          handleDeleteTab();
+        }}
       >
         {Icon}
         <span className="text-xs text-zinc-800 whitespace-nowrap">{label}</span>

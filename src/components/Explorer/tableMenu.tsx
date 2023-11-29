@@ -3,6 +3,8 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { ExplorerContextMenu } from "./explorerContextMenu";
+import { openNewTab } from "@/stores/tabsStore";
+import { useNavigate } from "react-router";
 
 interface TableMenuProps {
   title: string;
@@ -19,10 +21,19 @@ export function TableMenu({
 }: TableMenuProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
+  const navigate = useNavigate();
+
   return (
     <Collapsible.Root open={isOpen} onOpenChange={setIsOpen}>
       <ExplorerContextMenu>
-        <Collapsible.Trigger className="flex items-center gap-2 py-1 w-full border border-transparent">
+        <Collapsible.Trigger
+          className="flex items-center gap-2 py-1 w-full border border-transparent hover:bg-zinc-600 transition-colors"
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            const newTab = openNewTab("data");
+            navigate(`data/${newTab.id}`);
+          }}
+        >
           {isOpen ? (
             <ChevronDown className="text-zinc-800" size={15} />
           ) : (

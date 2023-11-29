@@ -1,13 +1,13 @@
 import { TabType } from "@/@types/Tab";
 import { signal } from "@preact/signals-react";
 
-interface TabsContextProps {
+interface TabsStoreProps {
   type: TabType;
   name: string;
   id: number;
 }
 
-export const tabsContext = signal<TabsContextProps[]>([
+export const tabsStore = signal<TabsStoreProps[]>([
   //   {
   //     id: 1,
   //     type: "query",
@@ -31,19 +31,18 @@ export const tabsContext = signal<TabsContextProps[]>([
 ]);
 
 export function closeTab(id: number) {
-  tabsContext.value = tabsContext.value.filter((tab) => tab.id !== id);
+  tabsStore.value = tabsStore.value.filter((tab) => tab.id !== id);
 }
 
-// TODO: add tab function
-export function openNewTab() {
+export function openNewTab(type: TabType = "query") {
   const id = Math.random() * 100;
   const newTab = {
     id,
-    type: "query",
-    name: `Query #${id}`,
+    type,
+    name: `${type} #${id}`,
   } as const;
 
-  tabsContext.value = [...tabsContext.value, newTab];
+  tabsStore.value = [...tabsStore.value, newTab];
 
   return newTab;
 }
