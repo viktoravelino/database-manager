@@ -3,7 +3,9 @@ import { DatabaseSelect } from "./components/DatabaseSelect";
 import { Tabs } from "./components/tabs";
 import { ConnectionInfo } from "./components/connectionInfo";
 
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+// import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
       <main className="bg-zinc-500 grid grid-rows-[30px_1fr]">
         <Tabs />
 
-        {/* <div className="">content</div> */}
-        <PanelGroup direction="vertical">
+        <div className="">
+          <Outlet />
+        </div>
+        {/* <PanelGroup direction="vertical">
           <Panel
             className="bg-slate-100 flex items-center justify-center text-center p-2"
             // defaultSize={defaultLayout[0]}
@@ -39,7 +43,7 @@ function App() {
           >
             Right panel
           </Panel>
-        </PanelGroup>
+        </PanelGroup> */}
       </main>
     </div>
   );

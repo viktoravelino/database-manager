@@ -5,11 +5,11 @@ import { ReactNode } from "react";
 interface TableColumnMenuProps {
   children?: ReactNode[];
   label: string;
-  subLabel: string;
+  sublabel: string;
 }
 
 export function TableColumnMenu(props: TableColumnMenuProps) {
-  const { label, subLabel } = props;
+  const { label, sublabel } = props;
   //   const { markFileAsOpen } = useOpenFiles();
   //   const pathName = usePathname();
 
@@ -23,7 +23,7 @@ export function TableColumnMenu(props: TableColumnMenuProps) {
       {...props}
     >
       <span>{label}</span>
-      <span className="text-zinc-400">{subLabel}</span>
+      <span className="text-zinc-400">{sublabel}</span>
     </span>
   );
 }
