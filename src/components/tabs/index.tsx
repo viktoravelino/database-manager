@@ -7,6 +7,8 @@ import { openNewTab, tabsStore } from "@/stores/tabsStore";
 
 import { Tab } from "./tab";
 
+
+
 export function Tabs() {
   const navigate = useNavigate();
 

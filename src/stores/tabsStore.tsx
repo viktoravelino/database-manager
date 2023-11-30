@@ -1,5 +1,5 @@
 import { TabType } from "@/@types/Tab";
-import { signal } from "@preact/signals-react";
+import { effect, signal } from "@preact/signals-react";
 
 interface TabsStoreProps {
   type: TabType;
@@ -7,28 +7,17 @@ interface TabsStoreProps {
   id: number | string;
 }
 
-export const tabsStore = signal<TabsStoreProps[]>([
-  //   {
-  //     id: 1,
-  //     type: "query",
-  //     name: "Query #1",
-  //   },
-  //   {
-  //     id: 2,
-  //     type: "query",
-  //     name: "Query #2",
-  //   },
-  //   {
-  //     id: 3,
-  //     type: "data",
-  //     name: "data #1",
-  //   },
-  //   {
-  //     id: 4,
-  //     type: "structure",
-  //     name: "structure #1",
-  //   },
-]);
+function getTabs() {
+  const localStorageTabs = localStorage.getItem("tabs");
+  if (!localStorageTabs) return [];
+  return JSON.parse(localStorageTabs);
+}
+
+export const tabsStore = signal<TabsStoreProps[]>(getTabs());
+
+effect(() => {
+  localStorage.setItem("tabs", JSON.stringify(tabsStore.value));
+});
 
 export function closeTab(id: number | string) {
   tabsStore.value = tabsStore.value.filter((tab) => tab.id !== id);
@@ -37,14 +26,20 @@ export function closeTab(id: number | string) {
 export interface OpenNewTabProps {
   type?: TabType;
   name?: string;
+  id?: number | string;
 }
 
-export function openNewTab({ name, type = "query" }: OpenNewTabProps) {
-  const id = name ? `${name}-${findNextId()}` : checkNextNumber(type);
+export function openNewTab({ name, id, type = "query" }: OpenNewTabProps) {
+  const internalId = name
+    ? `${name}-${findNextId()}`
+    : id
+    ? id
+    : checkNextNumber(type);
+
   const newTab = {
-    id,
+    id: internalId,
     type,
-    name: name ?? `${type} #${id}`,
+    name: name ?? `${type} #${internalId}`,
   } as const;
 
   tabsStore.value = [...tabsStore.value, newTab];
@@ -70,8 +65,6 @@ function findNextId() {
 function checkNextNumber(type: TabType = "query") {
   const tabs = tabsStore.value.filter((tab) => tab.type === type);
   let found = false;
-  console.log(tabs.length);
-  // find next min number based on name
   let nextNumber = 1;
   while (!found) {
     const name = `${type} #${nextNumber}`;
@@ -82,7 +75,6 @@ function checkNextNumber(type: TabType = "query") {
       return nextNumber;
     }
     nextNumber++;
-    // found = true;
   }
 
   return nextNumber;
