@@ -9,7 +9,7 @@ import { closeTab, tabsStore } from "@/stores/tabsStore";
 import { cn } from "@/lib/utils";
 
 interface TabsProps {
-  id: number;
+  id: number | string;
   active?: boolean;
   label: string;
   type: TabType;

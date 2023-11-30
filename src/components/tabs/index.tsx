@@ -11,7 +11,7 @@ export function Tabs() {
   const navigate = useNavigate();
 
   function handleNewTabClick() {
-    const newTab = openNewTab();
+    const newTab = openNewTab({});
     navigate(`${newTab.type}/${newTab.id}`);
   }
 

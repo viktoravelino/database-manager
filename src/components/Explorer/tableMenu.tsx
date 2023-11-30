@@ -7,14 +7,14 @@ import { openNewTab } from "@/stores/tabsStore";
 import { useNavigate } from "react-router";
 
 interface TableMenuProps {
-  title: string;
+  tableName: string;
   children: ReactNode;
   defaultOpen?: boolean;
   icon: LucideIcon;
 }
 
 export function TableMenu({
-  title,
+  tableName,
   children,
   defaultOpen = false,
   icon: Icon,
@@ -25,12 +25,12 @@ export function TableMenu({
 
   return (
     <Collapsible.Root open={isOpen} onOpenChange={setIsOpen}>
-      <ExplorerContextMenu>
+      <ExplorerContextMenu tableName={tableName}>
         <Collapsible.Trigger
           className="flex items-center gap-2 py-1 w-full border border-transparent hover:bg-zinc-600 transition-colors"
           onDoubleClick={(e) => {
-            e.stopPropagation();
-            const newTab = openNewTab("data");
+            e.preventDefault();
+            const newTab = openNewTab({ type: "data", name: tableName });
             navigate(`data/${newTab.id}`);
           }}
         >
@@ -41,7 +41,7 @@ export function TableMenu({
           )}
           <span className="text-xs font-semibold inline-flex items-center gap-1">
             {Icon && <Icon className="h-3 w-3" />}
-            {title}
+            {tableName}
           </span>
         </Collapsible.Trigger>
       </ExplorerContextMenu>
