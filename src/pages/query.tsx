@@ -1,18 +1,20 @@
 import { Editor } from "@/components/Editor";
 import { Button } from "@/components/ui/button";
 import { openNewTab, tabsStore } from "@/stores/tabsStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useParams } from "react-router-dom";
+import { editor } from "monaco-editor";
 
 export function QueryPage() {
   const { id } = useParams();
 
   const [height, setHeight] = useState(0);
-  const [editorContent, setEditorContent] = useState(`${id}`);
+  const [textSelected, setTextSelected] = useState("");
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   useEffect(() => {
-    setEditorContent(`${id}`);
+    // setEditorContent(`${id}`);
     const tab = tabsStore.value.find((tab) => tab.id === Number(id));
     if (!tab) {
       openNewTab({
@@ -22,8 +24,11 @@ export function QueryPage() {
     }
   }, [id]);
 
-  function handleEditorChange(value: string | undefined) {
-    setEditorContent(value || "");
+  function onMountEditor(editor: editor.IStandaloneCodeEditor) {
+    editorRef.current = editor;
+    editor.onDidChangeCursorSelection((e) => {
+      setTextSelected(editor.getModel()?.getValueInRange(e.selection!) ?? "");
+    });
   }
 
   return (
@@ -39,11 +44,21 @@ export function QueryPage() {
             height: height - 50,
           }}
         >
-          <Editor onChange={handleEditorChange} value={editorContent} />
+          <Editor
+            onMount={onMountEditor}
+            defaultValue="select hello from world;"
+          />
         </div>
         <div className="flex items-center justify-end flex-1 px-3">
-          <Button size="sm" onClick={() => console.log(editorContent)}>
-            Run/Run Selection
+          <Button
+            size="sm"
+            onClick={() =>
+              console.log(
+                textSelected ? textSelected : editorRef.current?.getValue()
+              )
+            }
+          >
+            {textSelected ? "Run Selection" : "Run"}
           </Button>
         </div>
       </Panel>
