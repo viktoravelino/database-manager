@@ -26,7 +26,7 @@ export function Explorer() {
 
       {/* Explorer content */}
       <nav>
-        <TableMenu tableName="test_table 1" icon={Table}>
+        <TableMenu tableName="test_table_1" icon={Table}>
           <TableColumnMenu label="id" sublabel="int unsigned"></TableColumnMenu>
           <TableColumnMenu
             label="created_at"
@@ -34,7 +34,7 @@ export function Explorer() {
           ></TableColumnMenu>
         </TableMenu>
 
-        <TableMenu tableName="test_table 2" icon={Table}>
+        <TableMenu tableName="test_table_2" icon={Table}>
           <TableColumnMenu label="id" sublabel="int unsigned"></TableColumnMenu>
           <TableColumnMenu
             label="created_at"
