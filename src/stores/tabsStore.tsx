@@ -5,6 +5,7 @@ interface TabsStoreProps {
   type: TabType;
   name: string;
   id: number | string;
+  content?: string;
 }
 
 function getTabs() {

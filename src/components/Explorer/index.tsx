@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { TableMenu } from "./tableMenu";
 import { TableColumnMenu } from "./tableColumnMenu";
 
+export const SIDEBAR_WIDTH = "200px";
+
 export function Explorer() {
   return (
     <div>

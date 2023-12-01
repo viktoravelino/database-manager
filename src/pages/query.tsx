@@ -1,7 +1,7 @@
 import { Editor } from "@/components/Editor";
 import { Button } from "@/components/ui/button";
 import { openNewTab, tabsStore } from "@/stores/tabsStore";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useParams } from "react-router-dom";
 import { editor } from "monaco-editor";
@@ -13,16 +13,20 @@ export function QueryPage() {
   const [textSelected, setTextSelected] = useState("");
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
-  useEffect(() => {
-    // setEditorContent(`${id}`);
-    const tab = tabsStore.value.find((tab) => tab.id === Number(id));
-    if (!tab) {
-      openNewTab({
-        id: Number(id),
-        type: "query",
-      });
-    }
+  const tab = useMemo(() => {
+    return tabsStore.value.find((tab) => tab.id === Number(id));
   }, [id]);
+
+  const defaultValue = tab?.content ?? "select hello from world;";
+
+  useLayoutEffect(() => {
+    if (tab) return;
+
+    openNewTab({
+      id: Number(id),
+      type: "query",
+    });
+  }, [tab, id]);
 
   function onMountEditor(editor: editor.IStandaloneCodeEditor) {
     editorRef.current = editor;
@@ -44,10 +48,7 @@ export function QueryPage() {
             height: height - 50,
           }}
         >
-          <Editor
-            onMount={onMountEditor}
-            defaultValue="select hello from world;"
-          />
+          <Editor onMount={onMountEditor} defaultValue={defaultValue} />
         </div>
         <div className="flex items-center justify-end flex-1 px-3">
           <Button
