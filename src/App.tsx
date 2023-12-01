@@ -1,4 +1,4 @@
-import { Explorer, SIDEBAR_WIDTH } from "@/components/Explorer";
+import { Explorer } from "@/components/Explorer";
 import { DatabaseSelect } from "@/components/DatabaseSelect";
 import { Tabs } from "@/components/tabs";
 import { ConnectionInfo } from "@/components/connectionInfo";
@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className={`grid grid-cols-[${SIDEBAR_WIDTH}_1fr] min-h-screen`}>
+    <div className={`grid grid-cols-[200px_1fr] min-h-screen`}>
       <aside className="flex flex-col bg-zinc-700">
         <div className="px-1 flex-1">
           <DatabaseSelect />
