@@ -31,16 +31,12 @@ export interface OpenNewTabProps {
 }
 
 export function openNewTab({ name, id, type = "query" }: OpenNewTabProps) {
-  const internalId = name
-    ? `${name}-${findNextId()}`
-    : id
-    ? id
-    : checkNextNumber(type);
+  const internalId = generateInternalId(name, id, type);
 
   const newTab = {
     id: internalId,
     type,
-    name: name ?? `${type} #${internalId}`,
+    name: name || `${type} #${internalId}`,
   } as const;
 
   tabsStore.value = [...tabsStore.value, newTab];
@@ -48,35 +44,33 @@ export function openNewTab({ name, id, type = "query" }: OpenNewTabProps) {
   return newTab;
 }
 
-function findNextId() {
-  const tabs = tabsStore.value.filter((tab) => tab.type !== "query");
-  const ids = tabs.map((tab) => tab.id.toString().split("-")[1]);
-
-  let found = false;
-  let nextNumber = 1;
-  while (!found) {
-    if (!ids.includes(nextNumber.toString())) {
-      found = true;
-      return nextNumber;
-    }
-    nextNumber++;
-  }
+function generateInternalId(
+  name: string | undefined,
+  id: number | string | undefined,
+  type: TabType
+): number | string {
+  return name ? `${name}-${findNextId()}` : id || checkNextNumber(type);
 }
 
-function checkNextNumber(type: TabType = "query") {
-  const tabs = tabsStore.value.filter((tab) => tab.type === type);
-  let found = false;
-  let nextNumber = 1;
-  while (!found) {
-    const name = `${type} #${nextNumber}`;
-    const tab = tabs.find((tab) => tab.name === name);
+function findNextId() {
+  const tabs = tabsStore.value.filter((tab) => tab.type !== "query");
+  const ids = tabs.map((tab) => parseInt(tab.id.toString().split("-")[1]));
 
-    if (!tab) {
-      found = true;
-      return nextNumber;
-    }
+  let nextNumber = 1;
+  while (ids.includes(nextNumber)) {
     nextNumber++;
   }
-
   return nextNumber;
+}
+
+function checkNextNumber(type: TabType = "query"): number {
+  const tabs = tabsStore.value.filter((tab) => tab.type === type);
+
+  for (let nextNumber = 1; ; nextNumber++) {
+    const name = `${type} #${nextNumber}`;
+
+    if (!tabs.some((tab) => tab.name === name)) {
+      return nextNumber;
+    }
+  }
 }
