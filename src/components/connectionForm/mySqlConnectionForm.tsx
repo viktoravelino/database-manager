@@ -124,19 +124,14 @@ export function MySqlConnectionForm() {
               <FormItem>
                 <FormLabel>Port</FormLabel>
 
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="3306"
-                      className="px-2 py-1 h-fit rounded text-[10px]"
-                      {...field}
-                    />
-                  </FormControl>
-                </Select>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="3306"
+                    className="px-2 py-1 h-fit rounded text-[10px]"
+                    {...field}
+                  />
+                </FormControl>
 
                 <FormMessage />
               </FormItem>
@@ -191,14 +186,12 @@ export function MySqlConnectionForm() {
             <FormItem>
               <FormLabel>Default Database</FormLabel>
 
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <Input
-                    className="px-2 py-1 h-fit rounded text-[10px]"
-                    {...field}
-                  />
-                </FormControl>
-              </Select>
+              <FormControl>
+                <Input
+                  className="px-2 py-1 h-fit rounded text-[10px]"
+                  {...field}
+                />
+              </FormControl>
 
               <FormMessage />
             </FormItem>

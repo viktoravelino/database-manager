@@ -7,6 +7,7 @@ import { QueryPage } from "./pages/query.tsx";
 import { Connect } from "./pages/connect.tsx";
 import { Dashboard } from "./pages/dashboard.tsx";
 import React from "react";
+import { Page } from "./pages/tableData.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "data/:id",
-        element: <div>Data Page</div>,
+        element: <Page />,
       },
       {
         path: "structure/:id",

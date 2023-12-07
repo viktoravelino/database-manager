@@ -1,6 +1,6 @@
 import { DatabaseSelect } from "@/components/DatabaseSelect";
 import { Explorer } from "@/components/Explorer";
-import { ConnectionInfo } from "@/components/connectionInfo";
+import { ConnectionInfo } from "@/components/connectionInfoFooter";
 import { Tabs } from "@/components/tabs";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
