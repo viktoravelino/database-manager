@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDownIcon, ArrowUpDown, ArrowUpIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpDown, ArrowUpIcon, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import {
@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useParams } from "react-router-dom";
 
 type Payment = {
   id: string;
@@ -184,28 +185,66 @@ export function DataTable<TData, TValue>({
 }
 
 export function Page() {
+  const { id } = useParams();
+
+  const [test, setTest] = useState<{
+    [key: string]: {
+      [key: string]: string;
+    };
+  }>({});
+
+  if (!id) return null;
+
+  function handleChange(fieldName: string, fieldValue: string) {
+    setTest((prev) => ({
+      ...prev,
+      [id!]: {
+        [fieldName]: fieldValue,
+      },
+    }));
+  }
+
   return (
     <div>
-      <div className="flex items-center gap-1">
-        <Select>
-          <SelectTrigger className="flex-1 px-2 py-0.5 rounded">
+      <div className="flex items-center gap-1 h-10 py-2 px-2 bg-red-400">
+        <Select defaultValue="id">
+          <SelectTrigger className="w-[25%]">
             <SelectValue placeholder="Select a connection type..." />
           </SelectTrigger>
 
           <SelectContent>
-            <SelectItem value="asd">asd</SelectItem>
+            <SelectItem value="id">id</SelectItem>
           </SelectContent>
         </Select>
-        <Select>
-          <SelectTrigger className="flex-1 h-100 px-2 py-1 rounded">
-            <SelectValue placeholder="Select a connection type..." />
+        <Select defaultValue="equals">
+          <SelectTrigger className="w-[25%]">
+            <SelectValue />
           </SelectTrigger>
 
           <SelectContent>
-            <SelectItem value="asd">asd</SelectItem>
+            <SelectItem value="equals">equals</SelectItem>
+            <SelectItem value="does-not-equal">does not equal</SelectItem>
+            <SelectItem value="like">like</SelectItem>
+            <SelectItem value="less-than">less than</SelectItem>
+            <SelectItem value="less-than-or-equal">
+              less than or equal
+            </SelectItem>
+            <SelectItem value="greater-than">greater than</SelectItem>
+            <SelectItem value="greater-than-or-equal">
+              greater than or equal
+            </SelectItem>
+            <SelectItem value="in">in</SelectItem>
           </SelectContent>
         </Select>
-        <Input className="px-2 py-1 h-fit rounded text-[10px] w-full" />
+        <Input
+          value={test[id]?.input ?? ""}
+          onChange={(e) => handleChange("input", e.target.value)}
+          className="w-full"
+        />
+
+        <Button size="icon" className="rounded-full aspect-square h-full w-9">
+          <Search className="h-4 w-4" />
+        </Button>
       </div>
       <DataTable columns={columns} data={payments} />
     </div>
