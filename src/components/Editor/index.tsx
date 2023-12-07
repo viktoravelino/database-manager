@@ -11,10 +11,15 @@ export const Editor = ({ onMount, defaultValue }: EditorProps) => {
   const { id } = useParams();
 
   function handleOnChange(value: string | undefined) {
-    const tab = tabsStore.value.find((tab) => tab.id === Number(id));
-    if (!tab) return;
-    tab.content = value ?? "";
-    tabsStore.value = [...tabsStore.value];
+    tabsStore.value = tabsStore.value.map((tab) => {
+      if (tab.id === Number(id))
+        return {
+          ...tab,
+          content: value ?? "",
+        };
+
+      return tab;
+    });
   }
 
   return (
@@ -23,7 +28,8 @@ export const Editor = ({ onMount, defaultValue }: EditorProps) => {
         width={`calc(100dvw - 200px)`}
         language="sql"
         theme="vs-dark"
-        value={defaultValue}
+        defaultValue={defaultValue}
+        // value={defaultValue}
         onChange={handleOnChange}
         onMount={onMount}
       />

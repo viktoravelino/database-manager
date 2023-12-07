@@ -6,8 +6,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MySqlConnectionForm } from "@/components/connectionForm/mySqlConnectionForm";
+import { useNavigate } from "react-router-dom";
 
 const connectionTypes = [
   {
@@ -18,9 +19,16 @@ const connectionTypes = [
 ];
 
 export function Connect() {
+  const navigate = useNavigate();
   const [connectionTypeValue, setConnectionTypeValue] = useState<string | null>(
     null
   );
+
+  useEffect(() => {
+    // check if there is a connectionInfo in sessionStorage
+    const connectionInfo = sessionStorage.getItem("connectionInfo");
+    if (connectionInfo) navigate("/");
+  }, [navigate]);
 
   const Form = connectionTypes.find(
     (connectionType) => connectionType.value === connectionTypeValue

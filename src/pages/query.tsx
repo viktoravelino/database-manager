@@ -1,7 +1,7 @@
 import { Editor } from "@/components/Editor";
 import { Button } from "@/components/ui/button";
 import { openNewTab, tabsStore } from "@/stores/tabsStore";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useParams } from "react-router-dom";
 import { editor } from "monaco-editor";
@@ -11,15 +11,16 @@ export function QueryPage() {
 
   const [height, setHeight] = useState(0);
   const [textSelected, setTextSelected] = useState("");
+
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   const tab = useMemo(() => {
     return tabsStore.value.find((tab) => tab.id === Number(id));
   }, [id]);
 
-  const defaultValue = tab?.content ?? "select hello from world;";
+  const defaultValue = tab?.content || "select hello from world;";
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (tab) return;
 
     openNewTab({
@@ -48,7 +49,11 @@ export function QueryPage() {
             height: height - 50,
           }}
         >
-          <Editor onMount={onMountEditor} defaultValue={defaultValue} />
+          <Editor
+            key={tab?.id}
+            onMount={onMountEditor}
+            defaultValue={defaultValue}
+          />
         </div>
         <div className="flex items-center justify-end flex-1 px-3">
           <Button

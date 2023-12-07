@@ -18,6 +18,7 @@ import {
 } from "../ui/select";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const ConnectionModeEnum = z.enum(["host-port"]);
 
@@ -46,16 +47,20 @@ function formatEnumForLabel(value: string) {
 }
 
 export function MySqlConnectionForm() {
+  const navigate = useNavigate();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       connectionType: "mysql",
       connectionMode: ConnectionModeEnum.enum["host-port"],
+      connectionDefaultDatabase: "",
     },
   });
 
   function onSubmit(data: FormSchema) {
     console.log(data);
+    sessionStorage.setItem("connectionInfo", JSON.stringify(data));
+    navigate("/");
   }
 
   return (

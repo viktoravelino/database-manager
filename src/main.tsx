@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./styles/globals.css";
 import { QueryPage } from "./pages/query.tsx";
 import { Connect } from "./pages/connect.tsx";
+import { Dashboard } from "./pages/dashboard.tsx";
+import React from "react";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <App />,
+    element: <Dashboard />,
     children: [
       {
         path: "/",
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+// window.onunload = () => {
+//   localStorage.clear();
+// };
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
-  <RouterProvider router={router} />
-  // </React.StrictMode>
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

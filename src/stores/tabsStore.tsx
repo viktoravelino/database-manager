@@ -1,7 +1,8 @@
 import { TabType } from "@/@types/Tab";
 import { effect, signal } from "@preact/signals-react";
 
-const storage = localStorage;
+const storage = sessionStorage;
+const STORAGE_KEY = "tabs";
 
 interface TabsStoreProps {
   type: TabType;
@@ -11,7 +12,7 @@ interface TabsStoreProps {
 }
 
 function getTabs() {
-  const localStorageTabs = storage.getItem("tabs");
+  const localStorageTabs = storage.getItem(STORAGE_KEY);
   if (!localStorageTabs) return [];
   return JSON.parse(localStorageTabs);
 }
@@ -19,7 +20,7 @@ function getTabs() {
 export const tabsStore = signal<TabsStoreProps[]>(getTabs());
 
 effect(() => {
-  storage.setItem("tabs", JSON.stringify(tabsStore.value));
+  storage.setItem(STORAGE_KEY, JSON.stringify(tabsStore.value));
 });
 
 export function closeTab(id: number | string) {
