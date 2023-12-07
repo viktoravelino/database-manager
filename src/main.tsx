@@ -5,9 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./styles/globals.css";
 import { QueryPage } from "./pages/query.tsx";
-
+import { Connect } from "./pages/connect.tsx";
 
 const router = createBrowserRouter([
+  {
+    path: "connect",
+    element: <Connect />,
+  },
   {
     path: "/",
     element: <App />,
@@ -15,36 +19,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <div>empty state</div>,
-        // children: [
-        //   {
-        //     path: ":id",
-        //     element: <div>Home</div>,
-        //   },
-        // ],
       },
       {
         path: "query/:id",
         element: <QueryPage />,
       },
       {
-        path: "data",
+        path: "data/:id",
         element: <div>Data Page</div>,
-        children: [
-          {
-            path: ":id",
-            element: <div>Data Page</div>,
-          },
-        ],
       },
       {
-        path: "structure",
+        path: "structure/:id",
         element: <div>Structure Page</div>,
-        children: [
-          {
-            path: ":id",
-            element: <div>Structure Page</div>,
-          },
-        ],
       },
     ],
   },
