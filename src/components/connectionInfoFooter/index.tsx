@@ -10,7 +10,7 @@ export function ConnectionInfo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="mt-auto flex items-center gap-2 bg-zinc-600 px-2 py-1 text-zinc-300 font-semibold">
+        <button className="mt-auto flex items-center gap-2 bg-explorer-footer px-2 py-1 text-zinc-300 font-semibold">
           <Link2 className="w-4 aspect-square" />
           <span className="text-xs">SQL</span>
         </button>

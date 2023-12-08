@@ -7,19 +7,23 @@ export function Explorer() {
   return (
     <div>
       {/* Explorer header */}
-      <div className="flex items-center mb-1">
-        <strong className="text-xs text-zinc-800">TABLES</strong>
-        <div className="ml-1 rounded-full text-[8px] bg-slate-300 font-bold text-zinc-500 px-1.5 py-0.5 flex justify-center items-center leading-tight">
-          1
+      <div className="text-sidebar-heading mb-1 flex items-center">
+        <strong className="text-xs font-semibold">TABLES</strong>
+        <div className="bg-db-select-bg-hover text-sidebar-count-tab ml-1 flex items-center justify-center rounded-full px-1.5 py-0.5 text-[9px] font-bold leading-tight">
+          2
         </div>
-        <Button className="ml-auto" variant="ghost" size="icon">
-          <ChevronsUpDown className="h-3 w-3 text-zinc-600" />
+        <Button
+          className="text-db-select-text ml-auto"
+          variant="ghost"
+          size="icon"
+        >
+          <ChevronsUpDown className="h-3 w-3" />
         </Button>
-        <Button variant="ghost" size="icon">
-          <RotateCw className="h-3 w-3 text-zinc-600" />
+        <Button className="text-db-select-text" variant="ghost" size="icon">
+          <RotateCw className="h-3 w-3" />
         </Button>
-        <Button variant="ghost" size="icon">
-          <Plus className="h-4 w-4 text-zinc-600" />
+        <Button className="text-db-select-text" variant="ghost" size="icon">
+          <Plus className="h-4 w-4" />
         </Button>
       </div>
       {/* Explorer header end */}

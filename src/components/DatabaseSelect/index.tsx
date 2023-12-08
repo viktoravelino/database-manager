@@ -10,9 +10,9 @@ import { RotateCw, Plus } from "lucide-react";
 
 export function DatabaseSelect() {
   return (
-    <div className="border flex items-center px-1 py-1 h-6 rounded mb-4">
+    <div className="bg-db-select-bg text-db-select-text hover:bg-db-select-bg-hover mb-4 flex items-center rounded transition-colors focus-visible:outline-none focus-visible:ring-0">
       <Select defaultValue="db-1">
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="bg-transparent">
           <SelectValue placeholder="database" />
         </SelectTrigger>
 
@@ -23,11 +23,11 @@ export function DatabaseSelect() {
         </SelectContent>
       </Select>
 
-      <Button variant="ghost" size="icon" className="aspect-square">
-        <RotateCw className="h-3 w-h-3 opacity-50" />
+      <Button variant="ghost" size="icon" className="text-current">
+        <RotateCw className="w-h-3 h-3" />
       </Button>
-      <Button variant="ghost" size="icon">
-        <Plus className="h-3 w-3 opacity-50" />
+      <Button variant="ghost" size="icon" className="text-current">
+        <Plus className="h-3 w-3" />
       </Button>
     </div>
   );

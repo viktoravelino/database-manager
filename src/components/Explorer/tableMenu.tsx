@@ -26,27 +26,29 @@ export function TableMenu({
   return (
     <Collapsible.Root open={isOpen} onOpenChange={setIsOpen}>
       <ExplorerContextMenu tableName={tableName}>
-        <Collapsible.Trigger
-          className="flex items-center gap-2 py-1 w-full border border-transparent hover:bg-zinc-600 transition-colors"
+        <div
+          className="text-text-dark hover:bg-explorer-menu-bg-hover flex w-full items-center gap-1 rounded border border-transparent transition-colors"
           onDoubleClick={(e) => {
             e.preventDefault();
             const newTab = openNewTab({ type: "data", name: tableName });
             navigate(`data/${newTab.id}`);
           }}
         >
-          {isOpen ? (
-            <ChevronDown className="text-zinc-800" size={15} />
-          ) : (
-            <ChevronRight className="text-zinc-800" size={15} />
-          )}
-          <span className="text-xs font-semibold inline-flex items-center gap-1">
-            {Icon && <Icon className="h-3 w-3" />}
+          <Collapsible.Trigger className="opacity-50 hover:opacity-100">
+            {isOpen ? (
+              <ChevronDown className="text-current" size={15} />
+            ) : (
+              <ChevronRight className="text-current" size={15} />
+            )}
+          </Collapsible.Trigger>
+          <span className="inline-flex w-full select-none items-center gap-2 py-1 text-xs hover:cursor-pointer">
+            {Icon && <Icon className="text-theme-secondary h-3 w-3" />}
             {tableName}
           </span>
-        </Collapsible.Trigger>
+        </div>
       </ExplorerContextMenu>
 
-      <Collapsible.Content className="ml-2 border-l-[1px] border-zinc-300 mb-2">
+      <Collapsible.Content className="mb-2 ml-2 border-l-[1px] border-text-dark/20">
         {children}
       </Collapsible.Content>
     </Collapsible.Root>

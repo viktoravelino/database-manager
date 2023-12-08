@@ -17,9 +17,9 @@ export function Dashboard() {
   }, [navigate]);
 
   return (
-    <div className={`grid grid-cols-[200px_1fr] min-h-screen`}>
-      <aside className="flex flex-col bg-zinc-700">
-        <div className="px-1 flex-1">
+    <div className={`grid min-h-screen grid-cols-[200px_1fr]`}>
+      <aside className="bg-sidebar-bg flex flex-col">
+        <div className="flex-1 px-2 pt-3">
           <DatabaseSelect />
 
           <Explorer />
@@ -28,7 +28,7 @@ export function Dashboard() {
         <ConnectionInfo />
       </aside>
 
-      <main className="bg-zinc-500 grid grid-rows-[30px_1fr]">
+      <main className="grid grid-rows-[30px_1fr] bg-black">
         <Tabs />
 
         <div className="">
