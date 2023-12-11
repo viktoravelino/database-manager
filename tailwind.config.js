@@ -55,6 +55,11 @@ module.exports = {
         "context-menu-item-hover": "#303030",
         "context-menu-text": "#B7B7B7",
 
+        "tabs-bg": "#181818",
+        "tab-bg": "#282828",
+        "active-tab-bg": "#0f0f0f",
+        "tab-text": "#B7B7B7",
+
 
         //
         "theme-bg": "#181818",
@@ -90,7 +95,6 @@ module.exports = {
         "titlebar-bg": "transparent",
         "global-sidebar-bg": "transparent",
 
-        "tabs-bg": "transparent",
         "statusbar-bg": "rgba(255,255,255 0.1)",
 
         "statusbar-text": "black",

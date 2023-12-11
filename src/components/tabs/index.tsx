@@ -7,8 +7,6 @@ import { openNewTab, tabsStore } from "@/stores/tabsStore";
 
 import { Tab } from "./tab";
 
-
-
 export function Tabs() {
   const navigate = useNavigate();
 
@@ -18,7 +16,7 @@ export function Tabs() {
   }
 
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-0.5 bg-tabs-bg items-center pt-2">
       {tabsStore.value.map((tab) => {
         return (
           <Tab key={tab.id} label={tab.name} type={tab.type} id={tab.id} />
@@ -27,10 +25,10 @@ export function Tabs() {
 
       <Button
         size="icon"
-        className="self-center ml-2 rounded-full bg-zinc-200 hover:bg-zinc-300"
+        className="ml-2 rounded-full bg-zinc-200 hover:bg-zinc-300"
         onClick={handleNewTabClick}
       >
-        <Plus className="w-3 h-3 text-zinc-900" />
+        <Plus className="h-3 w-3 text-zinc-900" />
       </Button>
     </div>
   );

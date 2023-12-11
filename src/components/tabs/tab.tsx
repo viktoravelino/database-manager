@@ -6,7 +6,6 @@ import type { TabType } from "@/@types/Tab";
 
 import { Button } from "@/components/ui/button";
 import { closeTab, tabsStore } from "@/stores/tabsStore";
-import { cn } from "@/lib/utils";
 
 interface TabsProps {
   id: number | string;
@@ -16,9 +15,9 @@ interface TabsProps {
 }
 
 const iconMapper = {
-  query: <Code className="w-3 aspect-square text-pink-600" />,
-  data: <Table className="w-3 aspect-square text-yellow-600" />,
-  structure: <PencilLine className="w-3 aspect-square text-green-700" />,
+  query: <Code className="aspect-square w-3 text-pink-600" />,
+  data: <Table className="aspect-square w-3 text-yellow-600" />,
+  structure: <PencilLine className="aspect-square w-3 text-green-700" />,
 };
 
 export function Tab({ label, type, id }: TabsProps) {
@@ -35,7 +34,7 @@ export function Tab({ label, type, id }: TabsProps) {
     const newSelectedTab = nextTab ?? tabsStore.value[currentTabIndex - 1];
 
     navigate(
-      newSelectedTab ? `${newSelectedTab.type}/${newSelectedTab.id}` : "/"
+      newSelectedTab ? `${newSelectedTab.type}/${newSelectedTab.id}` : "/",
     );
     closeTab(id);
   }
@@ -43,38 +42,29 @@ export function Tab({ label, type, id }: TabsProps) {
   return (
     <div
       data-active={isLinkActive}
-      className={cn(
-        "flex items-center bg-zinc-300 pl-2 pr-1 py-1 rounded-t-md group data-[active=true]:bg-zinc-400 "
-        // { "bg-zinc-400": active, "bg-zinc-300": !active }
-      )}
+      className="bg-tab-bg data-[active=true]:bg-active-tab-bg text-tab-text group flex items-center rounded-t-md py-1 pl-2 pr-1 font-light data-[active=true]:text-white "
     >
       <NavLink
-        // {/* <button */}
         end
         to={`${type}/${id}`}
-        className="flex items-center gap-1 pr-1 data-[active]:bg-transparent"
+        className="flex items-center gap-2 pr-1"
         onAuxClick={(e) => {
           e.preventDefault();
           handleDeleteTab();
         }}
       >
         {Icon}
-        <span className="text-xs text-zinc-800 whitespace-nowrap">{label}</span>
-        {/* </button> */}
+        <span className="whitespace-nowrap text-xs">{label}</span>
       </NavLink>
       <Button
         variant="ghost"
         size="icon"
-        className="hover:bg-transparent text-zinc-800"
+        className="bg-transparent"
         onClick={handleDeleteTab}
       >
         <X
-          className={cn(
-            "w-3 h-3 invisible group-hover:visible hover:text-zinc-700 group-data-[active=true]:visible"
-            // {
-            //   visible: active,
-            // }
-          )}
+          strokeWidth={3}
+          className="invisible h-3 w-3 group-hover:visible group-data-[active=true]:visible hover:stroke-[4px] hover:text-zinc-100"
         />
       </Button>
     </div>
