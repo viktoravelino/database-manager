@@ -51,6 +51,11 @@ module.exports = {
         "explorer-item-sublabel-text": "#616161",
         "explorer-footer": "#303030",
 
+        "context-menu-bg": "#282828",
+        "context-menu-item-hover": "#303030",
+        "context-menu-text": "#B7B7B7",
+
+
         //
         "theme-bg": "#181818",
         "theme-base": "#fff",
