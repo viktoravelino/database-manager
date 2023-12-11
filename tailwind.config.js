@@ -42,7 +42,6 @@ module.exports = {
 
         "sidebar-bg": "#181818",
         "sidebar-heading": "#ffffffde",
-        // "sidebar-count-tab": "#B7B7B7",
 
         "explorer-menu-bg-hover": "#303030",
         "explorer-item-sublabel-text": "#616161",

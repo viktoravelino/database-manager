@@ -18,7 +18,7 @@ export function QueryPage() {
     return tabsStore.value.find((tab) => tab.id === Number(id));
   }, [id]);
 
-  const defaultValue = tab?.content || "select hello from world;";
+  const defaultValue = tab?.content || "select hello from world;\n\n\n\n\n\n\n\n\n";
 
   useEffect(() => {
     if (tab) return;
@@ -39,7 +39,7 @@ export function QueryPage() {
   return (
     <PanelGroup direction="vertical">
       <Panel
-        className="bg-slate-100 flex flex-col"
+        className="flex flex-col bg-transparent pt-2 text-text"
         onResize={(e) => {
           setHeight(e.sizePixels);
         }}
@@ -55,12 +55,12 @@ export function QueryPage() {
             defaultValue={defaultValue}
           />
         </div>
-        <div className="flex items-center justify-end flex-1 px-3">
+        <div className="flex flex-1 items-center justify-end px-3">
           <Button
             size="sm"
             onClick={() =>
               console.log(
-                textSelected ? textSelected : editorRef.current?.getValue()
+                textSelected ? textSelected : editorRef.current?.getValue(),
               )
             }
           >
@@ -68,10 +68,8 @@ export function QueryPage() {
           </Button>
         </div>
       </Panel>
-      <PanelResizeHandle className="w-full h-1 bg-slate-300"></PanelResizeHandle>
-      <Panel className="bg-slate-100 flex items-center justify-center text-center p-2">
-        results
-      </Panel>
+      <PanelResizeHandle className="h-1 w-full bg-zinc-800"></PanelResizeHandle>
+      <Panel className="flex flex-col bg-transparent text-text">results</Panel>
     </PanelGroup>
   );
 }
