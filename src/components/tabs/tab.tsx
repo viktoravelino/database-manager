@@ -16,7 +16,7 @@ interface TabsProps {
 
 const iconMapper = {
   query: <Code className="aspect-square w-3 text-pink-600" />,
-  data: <Table className="aspect-square w-3 text-yellow-600" />,
+  data: <Table className="aspect-square w-3 text-theme-primary" />,
   structure: <PencilLine className="aspect-square w-3 text-green-700" />,
 };
 
@@ -42,7 +42,7 @@ export function Tab({ label, type, id }: TabsProps) {
   return (
     <div
       data-active={isLinkActive}
-      className="bg-tab-bg data-[active=true]:bg-active-tab-bg text-tab-text group flex items-center rounded-t-md py-1 pl-2 pr-1 font-light data-[active=true]:text-white "
+      className="bg-tab-bg data-[active=true]:bg-active-tab-bg text-text group flex items-center rounded-t-md py-1 pl-2 pr-1 font-light data-[active=true]:text-white "
     >
       <NavLink
         end

@@ -10,7 +10,7 @@ import { RotateCw, Plus } from "lucide-react";
 
 export function DatabaseSelect() {
   return (
-    <div className="bg-db-select-bg text-db-select-text hover:bg-db-select-bg-hover mb-4 flex items-center rounded transition-colors focus-visible:outline-none focus-visible:ring-0">
+    <div className="bg-select-bg text-text hover:brightness-125 mb-4 flex items-center rounded transition-all focus-visible:outline-none">
       <Select defaultValue="db-1">
         <SelectTrigger className="bg-transparent">
           <SelectValue placeholder="database" />

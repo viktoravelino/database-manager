@@ -206,7 +206,7 @@ export function Page() {
 
   return (
     <div>
-      <div className="flex items-center gap-1 h-10 py-2 px-2 bg-red-400">
+      <div className="flex items-center gap-1 h-10 py-2 px-2">
         <Select defaultValue="id">
           <SelectTrigger className="w-[25%]">
             <SelectValue placeholder="Select a connection type..." />

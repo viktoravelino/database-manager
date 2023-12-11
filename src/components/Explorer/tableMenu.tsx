@@ -27,7 +27,7 @@ export function TableMenu({
     <Collapsible.Root open={isOpen} onOpenChange={setIsOpen}>
       <ExplorerContextMenu tableName={tableName}>
         <div
-          className="text-text-dark hover:bg-explorer-menu-bg-hover flex w-full items-center gap-1 rounded border border-transparent transition-colors"
+          className="text-text hover:bg-explorer-menu-bg-hover flex w-full items-center gap-1 rounded border border-transparent transition-colors"
           onDoubleClick={(e) => {
             e.preventDefault();
             const newTab = openNewTab({ type: "data", name: tableName });
@@ -48,7 +48,7 @@ export function TableMenu({
         </div>
       </ExplorerContextMenu>
 
-      <Collapsible.Content className="mb-2 ml-2 border-l-[1px] border-text-dark/20">
+      <Collapsible.Content className="mb-2 ml-2 border-l-[1px] border-text/20">
         {children}
       </Collapsible.Content>
     </Collapsible.Root>

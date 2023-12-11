@@ -38,37 +38,44 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       colors: {
+        "theme-primary": "#4ad0ff",
+
         "sidebar-bg": "#181818",
         "sidebar-heading": "#ffffffde",
-        "sidebar-count-tab": "#B7B7B7",
-
-        "db-select-text": "#B7B7B7",
-        "db-select-bg-hover": "#303030",
-        "db-select-bg": "#282828",
+        // "sidebar-count-tab": "#B7B7B7",
 
         "explorer-menu-bg-hover": "#303030",
-        "explorer-item-label-text": "#C5C5C5",
         "explorer-item-sublabel-text": "#616161",
         "explorer-footer": "#303030",
 
         "context-menu-bg": "#282828",
         "context-menu-item-hover": "#303030",
-        "context-menu-text": "#B7B7B7",
 
         "tabs-bg": "#181818",
         "tab-bg": "#282828",
         "active-tab-bg": "#0f0f0f",
-        "tab-text": "#B7B7B7",
 
+        "main-bg": "#0f0f0f",
 
-        //
+        "badge-bg": "#303030",
+
+        text: "#C5C5C5",
+
+        // select component
+        "select-bg": "#282828",
+        "select-text": "#B7B7B7",
+
+        // input component
+        "input-bg": "#282828",
+        "input-text": "#B7B7B7",
+
+        // TODO: delete below colors
         "theme-bg": "#181818",
         "theme-base": "#fff",
-        "theme-primary": "#fad83b",
+        // "theme-primary": "#fad83b",
         "theme-secondary": "#4ad0ff",
 
         "text-dark": "#ffffffde",
-        text: "#ffffffab",
         "text-light": "#ffffff91",
         "text-lighter": "#ffffff5e",
         "text-hint": "#ffffff5e",

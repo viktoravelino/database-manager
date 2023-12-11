@@ -9,20 +9,20 @@ export function Explorer() {
       {/* Explorer header */}
       <div className="text-sidebar-heading mb-1 flex items-center">
         <strong className="text-xs font-semibold">TABLES</strong>
-        <div className="bg-db-select-bg-hover text-sidebar-count-tab ml-1 flex items-center justify-center rounded-full px-1.5 py-0.5 text-[9px] font-bold leading-tight">
+        <div className="bg-badge-bg text-text ml-1 flex items-center justify-center rounded-full px-1.5 py-0.5 text-[9px] font-bold leading-tight">
           2
         </div>
         <Button
-          className="text-db-select-text ml-auto"
+          className="text-text ml-auto"
           variant="ghost"
           size="icon"
         >
           <ChevronsUpDown className="h-3 w-3" />
         </Button>
-        <Button className="text-db-select-text" variant="ghost" size="icon">
+        <Button className="text-text" variant="ghost" size="icon">
           <RotateCw className="h-3 w-3" />
         </Button>
-        <Button className="text-db-select-text" variant="ghost" size="icon">
+        <Button className="text-text" variant="ghost" size="icon">
           <Plus className="h-4 w-4" />
         </Button>
       </div>

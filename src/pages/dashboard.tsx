@@ -28,7 +28,7 @@ export function Dashboard() {
         <ConnectionInfo />
       </aside>
 
-      <main className="grid grid-rows-[40px_1fr] bg-black">
+      <main className="grid grid-rows-[40px_1fr] bg-main-bg">
         <Tabs />
 
         <div className="">

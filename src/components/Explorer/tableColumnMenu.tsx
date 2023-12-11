@@ -19,7 +19,7 @@ export function TableColumnMenu(props: TableColumnMenuProps) {
     <span
       //   data-active={isCurrentActive}
       //   onClick={() => markFileAsOpen(props.href.toString())}
-      className="flex text-[10px] text-explorer-item-label-text items-center justify-between gap-2 pt-1 pl-3"
+      className="flex text-[10px] text-text items-center justify-between gap-2 pt-1 pl-3"
       {...props}
     >
       <span>{label}</span>
