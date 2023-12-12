@@ -35,10 +35,10 @@ export function Connect() {
   )?.form as React.FC;
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-main-bg">
       <aside></aside>
-      <main className="flex justify-center items-center h-full">
-        <div className="bg-zinc-300 p-4 rounded-xl">
+      <main className="flex text-text justify-center items-center h-full">
+        <div className="bg-sidebar-bg p-4 rounded-xl">
           {/* <div className="text-center"> */}
           <h1 className="text-xl font-bold">Connect to a database</h1>
           {/* </div> */}

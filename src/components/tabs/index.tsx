@@ -16,7 +16,7 @@ export function Tabs() {
   }
 
   return (
-    <div className="flex gap-0.5 bg-tabs-bg items-center pt-2">
+    <div className="flex items-center gap-0.5 bg-tabs-bg pt-2">
       {tabsStore.value.map((tab) => {
         return (
           <Tab key={tab.id} label={tab.name} type={tab.type} id={tab.id} />

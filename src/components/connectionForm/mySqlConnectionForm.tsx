@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
+
 import {
   Form,
   FormControl,
@@ -8,17 +10,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useNavigate } from "react-router-dom";
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const ConnectionModeEnum = z.enum(["host-port"]);
 
@@ -54,11 +55,11 @@ export function MySqlConnectionForm() {
       connectionType: "mysql",
       connectionMode: ConnectionModeEnum.enum["host-port"],
       connectionDefaultDatabase: "",
+      connectionPort: "3306",
     },
   });
 
   function onSubmit(data: FormSchema) {
-    console.log(data);
     sessionStorage.setItem("connectionInfo", JSON.stringify(data));
     navigate("/");
   }
@@ -78,7 +79,7 @@ export function MySqlConnectionForm() {
 
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full px-2 py-1 rounded">
+                  <SelectTrigger className="w-full rounded px-2 py-1">
                     <SelectValue placeholder="Select a connection type..." />
                   </SelectTrigger>
                 </FormControl>
@@ -108,7 +109,7 @@ export function MySqlConnectionForm() {
                 <FormControl>
                   <Input
                     placeholder="localhost"
-                    className="px-2 py-1 h-fit rounded text-[10px]"
+                    className="h-fit rounded px-2 py-1 text-[10px]"
                     {...field}
                   />
                 </FormControl>
@@ -128,7 +129,7 @@ export function MySqlConnectionForm() {
                   <Input
                     type="number"
                     placeholder="3306"
-                    className="px-2 py-1 h-fit rounded text-[10px]"
+                    className="h-fit rounded px-2 py-1 text-[10px]"
                     {...field}
                   />
                 </FormControl>
@@ -149,7 +150,7 @@ export function MySqlConnectionForm() {
 
                 <FormControl>
                   <Input
-                    className="px-2 py-1 h-fit rounded text-[10px]"
+                    className="h-fit rounded px-2 py-1 text-[10px]"
                     {...field}
                   />
                 </FormControl>
@@ -168,7 +169,7 @@ export function MySqlConnectionForm() {
                 <FormControl>
                   <Input
                     type="password"
-                    className="px-2 py-1 h-fit rounded text-[10px]"
+                    className="h-fit rounded px-2 py-1 text-[10px]"
                     {...field}
                   />
                 </FormControl>
@@ -188,7 +189,7 @@ export function MySqlConnectionForm() {
 
               <FormControl>
                 <Input
-                  className="px-2 py-1 h-fit rounded text-[10px]"
+                  className="h-fit rounded px-2 py-1 text-[10px]"
                   {...field}
                 />
               </FormControl>
@@ -198,7 +199,14 @@ export function MySqlConnectionForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <div className="mt-4 flex gap-2">
+          <Button onClick={() => {}} type="button" fullWidth variant="outline">
+            Test Connection
+          </Button>
+          <Button type="submit" fullWidth>
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
