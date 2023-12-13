@@ -28,6 +28,8 @@ export function QueryPage() {
     return tabsStore.value.find((tab) => tab.id === Number(id));
   }, [id]);
 
+  const defaultValue = tab?.content;
+
   // TODO: Protect if there is no id
   useOpenTabIfNotExists(tab, id);
 
@@ -56,7 +58,11 @@ export function QueryPage() {
             height: height - 50,
           }}
         >
-          <Editor key={tab?.id} onMount={onMountEditor} />
+          <Editor
+            key={tab?.id}
+            onMount={onMountEditor}
+            defaultValue={defaultValue}
+          />
         </div>
         <div className="flex flex-1 items-center justify-end px-3">
           <Button
