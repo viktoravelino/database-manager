@@ -7,7 +7,10 @@ interface EditorProps {
   defaultValue?: string;
 }
 
-export const Editor = ({ onMount, defaultValue }: EditorProps) => {
+export const Editor = ({
+  onMount,
+  defaultValue = "\n\n\n\n\n\n\n\n\n",
+}: EditorProps) => {
   const { id } = useParams();
 
   function handleOnChange(value: string | undefined) {
@@ -23,48 +26,37 @@ export const Editor = ({ onMount, defaultValue }: EditorProps) => {
   }
 
   return (
-    <>
-      <MonacoEditor
-        width={`calc(100dvw - 200px)`}
-        language="sql"
-        theme="myTheme"
-        className="bg-transparent"
-        defaultValue={defaultValue}
-        options={{
-          contextmenu: false,
-          lineNumbersMinChars: 3,
-          lineNumbers(lineNumber) {
-            return `<span class="text-[10px] text-zinc-700"> ${lineNumber} </span>`;
-          },
-          lineDecorationsWidth: 0,
+    <MonacoEditor
+      width={`calc(100dvw - 200px)`}
+      language="sql"
+      theme="myTheme"
+      className="bg-transparent"
+      defaultValue={defaultValue}
+      options={{
+        contextmenu: false,
+        lineNumbersMinChars: 3,
+        lineNumbers(lineNumber) {
+          return `<span class="text-[10px] text-zinc-700"> ${lineNumber} </span>`;
+        },
+        lineDecorationsWidth: 0,
 
-          minimap: {
-            enabled: false,
+        minimap: {
+          enabled: false,
+        },
+        overviewRulerLanes: 0,
+      }}
+      beforeMount={(monaco) => {
+        monaco.editor.defineTheme("myTheme", {
+          base: "vs-dark",
+          inherit: true,
+          rules: [],
+          colors: {
+            "editor.background": "#0f0f0f",
           },
-          overviewRulerLanes: 0,
-        }}
-        // value={defaultValue}
-        beforeMount={(monaco) => {
-          monaco.editor.defineTheme("myTheme", {
-            base: "vs-dark",
-            inherit: true,
-            rules: [
-              // {
-              //   token: "comment",
-              //   foreground: "ffa500",
-              //   fontStyle: "italic underline",
-              // },
-              // { token: "comment.js", foreground: "008800", fontStyle: "bold" },
-              // { token: "comment.css", foreground: "0000ff" }, // will inherit fontStyle from `comment` above
-            ],
-            colors: {
-              "editor.background": "#0f0f0f",
-            },
-          });
-        }}
-        onChange={handleOnChange}
-        onMount={onMount}
-      />
-    </>
+        });
+      }}
+      onChange={handleOnChange}
+      onMount={onMount}
+    />
   );
 };
