@@ -48,7 +48,7 @@ export function Connect() {
               <Label>Connection type</Label>
               <SelectTrigger
                 className="w-full px-2 py-1 rounded"
-                placeholder="Select a connection type..."
+                // placeholder="Select a connection type..."
               >
                 <SelectValue />
               </SelectTrigger>
