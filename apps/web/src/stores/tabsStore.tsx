@@ -4,7 +4,7 @@ import { effect, signal } from "@preact/signals-react";
 const storage = sessionStorage;
 const STORAGE_KEY = "tabs";
 
-interface TabsStoreProps {
+export interface Tab {
   type: TabType;
   name: string;
   id: number | string;
@@ -17,7 +17,7 @@ function getTabs() {
   return JSON.parse(localStorageTabs);
 }
 
-export const tabsStore = signal<TabsStoreProps[]>(getTabs());
+export const tabsStore = signal<Tab[]>(getTabs());
 
 effect(() => {
   storage.setItem(STORAGE_KEY, JSON.stringify(tabsStore.value));

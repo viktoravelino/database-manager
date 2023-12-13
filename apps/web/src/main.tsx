@@ -2,12 +2,12 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import "./styles/globals.css";
 import { QueryPage } from "./pages/query.tsx";
 import { Connect } from "./pages/connect.tsx";
 import { Dashboard } from "./pages/dashboard.tsx";
-import React from "react";
 import { Page } from "./pages/tableData.tsx";
+
+import "./styles/globals.css";
 
 const router = createBrowserRouter([
   {
@@ -38,12 +38,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-// window.onunload = () => {
-//   localStorage.clear();
-// };
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <RouterProvider router={router} />,
+  // </React.StrictMode>,
 );

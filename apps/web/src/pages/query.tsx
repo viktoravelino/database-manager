@@ -1,25 +1,16 @@
-import { Editor } from "@/components/Editor";
-import { Button } from "@/components/ui/button";
-import { openNewTab, tabsStore } from "@/stores/tabsStore";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useParams } from "react-router-dom";
 import { editor } from "monaco-editor";
 
-export function QueryPage() {
-  const { id } = useParams();
+import { Editor } from "@/components/Editor";
+import { Button } from "@/components/ui/button";
+import { Tab, openNewTab, tabsStore } from "@/stores/tabsStore";
 
-  const [height, setHeight] = useState(0);
-  const [textSelected, setTextSelected] = useState("");
-
-  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-
-  const tab = useMemo(() => {
-    return tabsStore.value.find((tab) => tab.id === Number(id));
-  }, [id]);
-
-  const defaultValue = tab?.content || "select hello from world;\n\n\n\n\n\n\n\n\n";
-
+function useOpenTabIfNotExists(
+  tab: Tab | undefined,
+  id: string | number | undefined,
+) {
   useEffect(() => {
     if (tab) return;
 
@@ -28,6 +19,22 @@ export function QueryPage() {
       type: "query",
     });
   }, [tab, id]);
+}
+
+export function QueryPage() {
+  const { id } = useParams<{ id: string }>();
+
+  const tab = useMemo(() => {
+    return tabsStore.value.find((tab) => tab.id === Number(id));
+  }, [id]);
+
+  // TODO: Protect if there is no id
+  useOpenTabIfNotExists(tab, id);
+
+  const [height, setHeight] = useState(0);
+  const [textSelected, setTextSelected] = useState("");
+
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   function onMountEditor(editor: editor.IStandaloneCodeEditor) {
     editorRef.current = editor;
@@ -49,11 +56,7 @@ export function QueryPage() {
             height: height - 50,
           }}
         >
-          <Editor
-            key={tab?.id}
-            onMount={onMountEditor}
-            defaultValue={defaultValue}
-          />
+          <Editor key={tab?.id} onMount={onMountEditor} />
         </div>
         <div className="flex flex-1 items-center justify-end px-3">
           <Button
